@@ -19,17 +19,6 @@
     "infoPromo": {
       "type": "string"
     },
-    "imgPromo": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "weekDay": {
       "type": "integer"
     },
@@ -47,6 +36,11 @@
     },
     "Categoria": {
       "type": "string"
+    },
+    "restaurant": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::restaurant.restaurant"
     }
   }
 }

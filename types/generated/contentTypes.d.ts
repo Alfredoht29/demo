@@ -511,10 +511,6 @@ export interface ApiPromotionPromotion extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     expirationDate: Schema.Attribute.DateTime;
     idPromotion: Schema.Attribute.UID & Schema.Attribute.Required;
-    imgPromo: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
     infoPromo: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -524,6 +520,10 @@ export interface ApiPromotionPromotion extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     relevance: Schema.Attribute.Integer;
+    restaurant: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::restaurant.restaurant'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
