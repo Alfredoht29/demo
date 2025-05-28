@@ -4,7 +4,7 @@ export default factories.createCoreController(
   'api::promotion.promotion',
   ({ strapi }) => ({
     async find(ctx) {
-      const { weekDay, savedIds } = ctx.query;
+      const { weekDay, savedIds, codeCity } = ctx.query;
       const existingFilters = (ctx.query.filters as Record<string, any>) || {};
 
       const now = new Date();
@@ -17,9 +17,11 @@ export default factories.createCoreController(
       ctx.query.filters = {
         ...existingFilters,
         expirationDate: { $gte: todayStart },
+
         ...(weekDay !== undefined && {
           weekDay: { $eq: parseInt(weekDay as string, 10) },
         }),
+
         ...(savedIds !== undefined && {
           id: {
             $in: (savedIds as string)
@@ -28,12 +30,15 @@ export default factories.createCoreController(
               .filter((n) => !isNaN(n)),
           },
         }),
+
+        ...(codeCity !== undefined && {
+          codeCity: { $eq: parseInt(codeCity as string, 10) },
+        }),
       };
 
-      // ✅ Populate restaurant.documentId only if not already set
       ctx.query.populate ??= {
         restaurant: {
-          fields: ['documentId'],
+          fields: ['documentId', 'nombre'],
         },
       };
 
