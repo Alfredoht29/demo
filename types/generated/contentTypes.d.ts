@@ -571,6 +571,7 @@ export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
   };
   attributes: {
     background: Schema.Attribute.String;
+    codeCity: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

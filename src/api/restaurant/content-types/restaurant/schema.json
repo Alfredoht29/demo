@@ -38,6 +38,9 @@
     },
     "Descripcion": {
       "type": "text"
+    },
+    "codeCity": {
+      "type": "integer"
     }
   }
 }
