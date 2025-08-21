@@ -587,6 +587,7 @@ export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
     nombre: Schema.Attribute.String;
     paginaPersonal: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    reservation_num: Schema.Attribute.String;
     restaurantId: Schema.Attribute.UID;
     thumbnail: Schema.Attribute.String;
     ubicacion: Schema.Attribute.String;

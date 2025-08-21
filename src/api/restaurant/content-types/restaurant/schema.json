@@ -41,6 +41,9 @@
     },
     "codeCity": {
       "type": "integer"
+    },
+    "reservation_num": {
+      "type": "string"
     }
   }
 }
