@@ -38,7 +38,7 @@ export default factories.createCoreController(
 
       ctx.query.populate ??= {
         restaurant: {
-          fields: ['documentId', 'nombre'],
+          fields: ['documentId', 'nombre','delivery_num'],
         },
       };
 
