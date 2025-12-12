@@ -575,6 +575,7 @@ export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    delivery_num: Schema.Attribute.String;
     Descripcion: Schema.Attribute.Text;
     facebook: Schema.Attribute.String;
     instagram: Schema.Attribute.String;
