@@ -2,8 +2,8 @@ export default [
   {
     name: 'strapi::logger',
     config: {
-      level: 'debug', // Ejemplo de configuración adicional
-    }
+      level: 'debug',
+    },
   },
   {
     name: 'strapi::errors',
@@ -20,7 +20,13 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://209.38.139.117:3000', 'http://localhost:3000'],
+      enabled: true,
+      origin: process.env.CORS_ORIGIN
+        ? process.env.CORS_ORIGIN.split(',')
+        : ['http://localhost:3000'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',

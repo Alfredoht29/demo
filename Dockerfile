@@ -1,24 +1,33 @@
-FROM node:18-alpine
+# ── Stage 1: Builder ────────────────────────────────────────────
+FROM node:18-alpine AS builder
 
-# Install build dependencies for native modules and PostgreSQL
 RUN apk add --no-cache python3 make g++ postgresql-client
 
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm ci
 
-# Copy application code
 COPY . .
-
-# Build Strapi if needed
 RUN npm run build
+
+# ── Stage 2: Runner ─────────────────────────────────────────────
+FROM node:18-alpine AS runner
+
+RUN apk add --no-cache postgresql-client dumb-init
+
+ENV NODE_ENV=production
+WORKDIR /app
+
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/.cache ./.cache
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/config ./config
+COPY --from=builder /app/src ./src
 
 EXPOSE 1337
 
-ENV NODE_ENV=production
-
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["npm", "start"]
